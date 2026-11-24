@@ -1,5 +1,5 @@
 /* Hallmark · shape: Bento Grid (draw 522015) · genre: modern-minimal · theme: brand · redesign: full
- * paper: oklch(99% 0.003 265) · accent: oklch(80.6% 0.147 79) · display: Jost · body: Mulish · hero: Stage (swapped from Poster: the approved plan puts the cycle track in the hero) · nav: edge-aligned (swapped from masthead: the phone and quote must sit in the nav for a B2B buyer) · footer: statement · signature: the hire, deploy, pay, comply track in clay tiles, tilting in 3D
+ * paper: oklch(99% 0.003 265) · accent: oklch(80.6% 0.147 79) · display: Cabinet Grotesk (Fontshare) · body: Switzer (Fontshare) · hero: Stage (swapped from Poster: the approved plan puts the cycle track in the hero) · nav: edge-aligned (swapped from masthead: the phone and quote must sit in the nav for a B2B buyer) · footer: statement · signature: the hire, deploy, pay, comply track in clay tiles, tilting in 3D
  * axes: light/geometric-sans/warm · posture: Stage · contrast: pass · fold: pass · v2.0.0 */
 /* Hallmark · pre-emit critique: P4 H4 E4 S4 R4 V4 · weakest: S, a staffing page could share the layout; the real event photos and the four-step cycle carry what only Anaagat has */
 /* Hallmark · dropped #careers, #candForm, the city, cv and role fields · the owner removed job seekers as an audience */
@@ -234,7 +234,7 @@ h2, h3 { color: var(--color-heading); }
 .f3d .btn--quiet-dark { color: var(--color-on-dark-strong); }
 .news__row { display: flex; flex-wrap: wrap; gap: var(--space-xs); }
 .news__row input { flex: 1 1 100%; }
-.news input { flex: 1; min-width: 0; min-height: 44px; padding: 0 var(--space-md); border: 1px solid var(--color-on-dark-rule); border-radius: var(--radius-input); background: var(--color-navy-deep); color: var(--color-on-dark-strong); outline: 2px solid transparent; }
+.news input { min-width: 0; min-height: 44px; padding: 0 var(--space-md); border: 1px solid var(--color-on-dark-rule); border-radius: var(--radius-input); background: var(--color-navy-deep); color: var(--color-on-dark-strong); outline: 2px solid transparent; }
 .news input::placeholder { color: var(--color-on-dark-2); }
 .news input:focus-visible { outline-color: var(--color-accent); }
 .news__msg { min-height: 1lh; font-size: var(--text-sm); color: var(--color-on-dark); }

@@ -8,7 +8,7 @@
   --color-error: oklch(52% 0.19 27); --color-success: oklch(50% 0.12 150);
   --container: 1312px; --gutter: 64px; --gap-columns: 32px; --section-gap-s: 120px; --section-gap: 144px; --section-gap-l: 176px;
   --z-base: 1; --z-raised: 10; --z-dropdown: 100; --z-sticky: 200; --z-sticky-nav: 300; --z-modal: 400; --z-toast: 500; --z-tooltip: 600;
-  /* brand, read from the original page and the logo: navy #1d2b5e, blue #34508f, gold #f2b33d, Jost + Mulish */
+  /* brand, read from the original page and the logo: navy #1d2b5e, blue #34508f, gold #f2b33d, fonts: Cabinet Grotesk + Switzer from Fontshare, Mukta for Devanagari */
   --color-paper: oklch(99% 0.003 265); --color-paper-2: oklch(97.3% 0.006 265); --color-paper-3: oklch(94.8% 0.014 264);
   --color-ink: oklch(24.8% 0.037 272); --color-ink-2: oklch(38% 0.04 270); --color-muted: oklch(49.7% 0.032 269);
   --color-rule: oklch(90.9% 0.013 267);
@@ -24,10 +24,10 @@
   --tile-blue-a: oklch(52% 0.13 264); --tile-blue-b: oklch(30.8% 0.093 264); --grad-mid: oklch(36% 0.1 264); --grad-deep: oklch(23.5% 0.066 264); --grad-deeper: oklch(19% 0.05 264);
   --mark-face: oklch(46% 0.12 264); --mark-side: oklch(26% 0.08 264); --mark-side-2: oklch(19% 0.055 264);
   --google-blue: #4285f4; --google-red: #ea4335; --google-yellow: #fbbc05; --google-green: #34a853;
-  --font-display: "Jost", "Futura", "Century Gothic", ui-sans-serif, sans-serif; --font-body: "Mulish", "Segoe UI", ui-sans-serif, system-ui, sans-serif; --font-outlier: var(--font-body);
-  --font-wordmark: "Jost", ui-sans-serif, sans-serif; --font-hindi: "Mukta", ui-sans-serif, sans-serif;
-  --font-display-hi: "Jost", "Mukta", ui-sans-serif, sans-serif; --font-body-hi: "Mulish", "Mukta", ui-sans-serif, system-ui, sans-serif;
-  --display-weight: 600;
+  --font-display: "Cabinet Grotesk", "Segoe UI", ui-sans-serif, sans-serif; --font-body: "Switzer", "Segoe UI", ui-sans-serif, system-ui, sans-serif; --font-outlier: var(--font-body);
+  --font-wordmark: "Cabinet Grotesk", ui-sans-serif, sans-serif; --font-hindi: "Mukta", ui-sans-serif, sans-serif;
+  --font-display-hi: "Cabinet Grotesk", "Mukta", ui-sans-serif, sans-serif; --font-body-hi: "Switzer", "Mukta", ui-sans-serif, system-ui, sans-serif;
+  --display-weight: 700;
   --radius-card: 12px; --radius-tile: 14px; --radius-input: 8px; --radius-pill: 999px; --rule-hair: 1px; --shadow-card: 0 18px 36px -24px oklch(25% 0.09 269 / 0.4);
   --tracking-display: -0.015em;
 }
