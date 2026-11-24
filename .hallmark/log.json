@@ -1,0 +1,37 @@
+[
+ {
+  "mode": "redesign",
+  "depth": "full",
+  "scope": "page",
+  "shape": "Bento Grid",
+  "theme": "brand",
+  "axes": "light/geometric-sans/warm",
+  "hero": "Stage",
+  "nav": "edge-aligned",
+  "footer": "statement",
+  "imagery": "user photos",
+  "photos": [
+   "guidance",
+   "hiring-drive",
+   "seminar",
+   "speaker",
+   "founder"
+  ],
+  "entry": "hero cycle track",
+  "fingerprint": "navy-gold clay tiles",
+  "sections": [
+   "hero",
+   "bento services",
+   "photo split training centres",
+   "industries list",
+   "statement principles",
+   "founder + group",
+   "form quote"
+  ],
+  "signature": "hire, deploy, pay, comply track in 3D clay tiles",
+  "waived": [],
+  "prompt": "payroll, compliance and staffing services for industries and training centres",
+  "draw": "522015",
+  "date": "2026-11-24"
+ }
+]

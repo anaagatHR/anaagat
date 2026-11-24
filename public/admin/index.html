@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dashboard | Anaagat Humanpower</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500;600&family=Mulish:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/admin/admin.css">
+</head>
+<body class="dash">
+<header class="dash__bar">
+  <div class="container dash__barrow">
+    <a class="brand" href="/"><img src="/assets/logo.png" alt="Anaagat Humanpower website" width="600" height="256"></a>
+    <p class="dash__who" id="who"></p>
+    <nav class="dash__nav" aria-label="Account"><a href="/">View website</a><a href="/auth/logout">Sign out</a></nav>
+  </div>
+</header>
+
+<main class="container dash__main">
+  <h1>Dashboard</h1>
+  <p class="dash__setup" id="setup" role="status" hidden></p>
+
+  <section class="dash__sec" aria-labelledby="pages-title">
+    <h2 id="pages-title">Edit the website</h2>
+    <p class="lead">Open a page, click any text, link or picture, change it, then press Save. The header and footer can be edited from any page.</p>
+    <ul class="dash__pages">
+      <li><a class="dash__page" href="/?edit=1"><b>Home</b><span>Services, industries, training centres, founder, contact</span></a></li>
+      <li><a class="dash__page" href="/blog?edit=1"><b>Blog page</b><span>Heading and empty state</span></a></li>
+      <li><a class="dash__page" href="/privacy?edit=1"><b>Privacy policy</b><span>Grievance officer details still to fill</span></a></li>
+      <li><a class="dash__page" href="/terms?edit=1"><b>Terms and conditions</b><span>Legal text</span></a></li>
+      <li><a class="dash__page" href="/404?edit=1"><b>Page not found</b><span>The 404 page</span></a></li>
+    </ul>
+  </section>
+
+  <section class="dash__sec" aria-labelledby="blog-title">
+    <div class="dash__head">
+      <div>
+        <h2 id="blog-title">Blog drafts</h2>
+        <p class="lead">Every morning the AI writes a draft from that day’s news. Read it, fix anything, then publish. Nothing goes live on its own.</p>
+      </div>
+      <button class="btn" type="button" id="gen">Write today’s draft now</button>
+    </div>
+    <p class="dash__status" id="genStatus" role="status"></p>
+    <ul class="dash__posts" id="posts"><li class="dash__empty">Loading posts…</li></ul>
+  </section>
+</main>
+<script src="/admin/admin.js" defer></script>
+</body>
+</html>

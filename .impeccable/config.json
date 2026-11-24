@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "flat-type-hierarchy",
+        "value": "*",
+        "files": [
+          "index.html"
+        ],
+        "createdAt": "2026-11-24T20:25:10.642Z",
+        "reason": "Claude measured in Playwright: rendered h1 59px, h2 48px, h3 31px, h4 24px, body 16px; the static detector cannot resolve sizes from the @import-ed tokens.css"
+      }
+    ]
+  }
+}

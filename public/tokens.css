@@ -1,0 +1,30 @@
+:root {
+  --space-3xs: 2px; --space-2xs: 4px; --space-xs: 8px; --space-sm: 12px; --space-md: 16px; --space-lg: 24px; --space-xl: 40px; --space-2xl: 64px; --space-3xl: 96px; --space-4xl: 144px;
+  --text-xs: 0.8125rem; --text-sm: 0.875rem; --text-md: 1rem; --text-lg: 1.25rem; --text-xl: 1.5625rem; --text-2xl: 1.953rem; --text-3xl: 2.441rem;
+  --text-display-s: clamp(2.25rem, 4vw + 0.5rem, 3.75rem); --text-display: clamp(2.75rem, 5vw + 1rem, 5.25rem);
+  --text-section: clamp(2rem, 2.5vw + 1rem, 3.5rem); --text-title: clamp(1.25rem, 0.75vw + 0.875rem, 1.625rem); --text-lead: clamp(1.125rem, 0.35vw + 1rem, 1.375rem);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1); --ease-in: cubic-bezier(0.7, 0, 0.84, 0); --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-micro: 120ms; --dur-short: 220ms; --dur-long: 420ms;
+  --color-error: oklch(52% 0.19 27); --color-success: oklch(50% 0.12 150);
+  --container: 1312px; --gutter: 64px; --gap-columns: 32px; --section-gap-s: 120px; --section-gap: 144px; --section-gap-l: 176px;
+  --z-base: 1; --z-raised: 10; --z-dropdown: 100; --z-sticky: 200; --z-sticky-nav: 300; --z-modal: 400; --z-toast: 500; --z-tooltip: 600;
+  /* brand, read from the original page and the logo: navy #1d2b5e, blue #34508f, gold #f2b33d, Jost + Mulish */
+  --color-paper: oklch(99% 0.003 265); --color-paper-2: oklch(97.3% 0.006 265); --color-paper-3: oklch(94.8% 0.014 264);
+  --color-ink: oklch(24.8% 0.037 272); --color-ink-2: oklch(38% 0.04 270); --color-muted: oklch(49.7% 0.032 269);
+  --color-rule: oklch(90.9% 0.013 267);
+  --color-accent: oklch(80.6% 0.147 79); --color-accent-2: oklch(75.4% 0.148 77); --color-accent-ink: oklch(24% 0.049 85); --color-focus: oklch(50% 0.16 262);
+  --color-navy: oklch(30.8% 0.093 269); --color-navy-deep: oklch(24.4% 0.067 270); --color-blue: oklch(44.2% 0.109 264); --color-blue-soft: oklch(94.8% 0.014 264);
+  --color-on-dark: oklch(88.9% 0.03 269); --color-on-dark-2: oklch(82.1% 0.041 268); --color-on-dark-rule: oklch(40% 0.07 268); --color-on-dark-strong: oklch(99% 0.004 265);
+  --color-wa: oklch(48% 0.13 152);
+  --color-fill-bg: oklch(96% 0.04 85); --color-fill-line: oklch(70% 0.13 80); --color-fill-ink: oklch(40% 0.08 75);
+  /* clay tile: a highlight, a shade and a cast shadow, all tinted toward navy */
+  --tile-hi: oklch(100% 0 0 / 0.3); --tile-lo: oklch(15% 0.06 270 / 0.32); --tile-cast: oklch(25% 0.09 269 / 0.45); --tile-glyph-shadow: oklch(15% 0.06 270 / 0.45);
+  --tile-gold-a: oklch(85% 0.14 85); --tile-gold-b: oklch(70% 0.15 70); --tile-gold-cast: oklch(45% 0.12 70 / 0.45);
+  --tile-blue-a: oklch(52% 0.13 264); --tile-blue-b: oklch(30.8% 0.093 264); --grad-mid: oklch(36% 0.1 264); --grad-deep: oklch(23.5% 0.066 264); --grad-deeper: oklch(19% 0.05 264);
+  --mark-face: oklch(46% 0.12 264); --mark-side: oklch(26% 0.08 264); --mark-side-2: oklch(19% 0.055 264);
+  --google-blue: #4285f4; --google-red: #ea4335; --google-yellow: #fbbc05; --google-green: #34a853;
+  --font-display: "Jost", "Futura", "Century Gothic", ui-sans-serif, sans-serif; --font-body: "Mulish", "Segoe UI", ui-sans-serif, system-ui, sans-serif; --font-outlier: var(--font-body);
+  --display-weight: 600;
+  --radius-card: 12px; --radius-tile: 14px; --radius-input: 8px; --radius-pill: 999px; --rule-hair: 1px; --shadow-card: 0 18px 36px -24px oklch(25% 0.09 269 / 0.4);
+  --tracking-display: -0.015em;
+}

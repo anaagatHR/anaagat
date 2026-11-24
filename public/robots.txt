@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /api/
+Disallow: /auth/
+Disallow: /partials/
+
+Sitemap: https://anaagathr.com/sitemap.xml

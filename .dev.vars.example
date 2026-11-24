@@ -1,0 +1,33 @@
+# Copy to .dev.vars for local development (never commit .dev.vars).
+# In production, add the same names in Cloudflare: Pages project > Settings > Variables and Secrets.
+
+# Google sign-in (console.cloud.google.com > APIs & Services > Credentials > OAuth client ID, type "Web application").
+# Authorised redirect URIs: https://anaagathr.com/auth/callback  and  http://localhost:8788/auth/callback
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+
+# Who may sign in: every account of these Google Workspace domains (comma-separated) ...
+ALLOWED_DOMAINS=anaagathr.com
+# ... plus any extra individual addresses (optional, comma-separated)
+ADMIN_EMAILS=
+
+# Long random string that signs the session cookie. Generate one: node -e "console.log(crypto.randomUUID()+crypto.randomUUID())"
+SESSION_SECRET=
+
+# Shared secret between the daily cron Worker and /api/generate (set the same value on the Worker).
+CRON_SECRET=
+
+# Blog AI. Default: Claude via the Anthropic API.
+AI_PROVIDER=anthropic
+AI_API_KEY=
+# Optional model override (default claude-opus-5-5).
+AI_MODEL=
+
+# Later, to use your own server instead (any OpenAI-compatible /chat/completions endpoint, e.g. vLLM or Ollama):
+# AI_PROVIDER=custom
+# AI_BASE_URL=https://ai.your-server.example/v1
+# AI_MODEL=your-model-name
+# AI_API_KEY=optional-bearer-token
+
+# Optional: your own RSS feeds instead of the built-in Google News topics (comma-separated URLs).
+# BLOG_FEEDS=

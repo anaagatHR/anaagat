@@ -1,0 +1,11 @@
+# Daily blog-draft trigger. Deploy: cd cron && npx wrangler deploy && npx wrangler secret put CRON_SECRET
+name = "anaagat-blog-cron"
+main = "worker.js"
+compatibility_date = "2026-10-01"
+
+[vars]
+SITE_URL = "https://anaagathr.com"
+
+[triggers]
+# 02:30 UTC = 8:00 am in India, every day
+crons = ["30 2 * * *"]

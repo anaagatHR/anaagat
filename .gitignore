@@ -1,0 +1,15 @@
+# graft's local graph cache — regenerable, not committed (run `graft build`).
+/graft/
+
+# dependencies, local Cloudflare state and secrets
+node_modules/
+.wrangler/
+.dev.vars
+.env
+.env.*
+!.dev.vars.example
+
+# local tool output
+.playwright-mcp/
+.hallmark/before/
+.hallmark/after/
