@@ -49,6 +49,25 @@ test('rss parsing, topics, paths, slugs and AI replies', () => {
   assert.throws(() => parsePost('{"title":""}'));
 });
 
+test('Search Console: the service-account JWT verifies with the matching public key, and the submit call is well formed', async () => {
+  const { serviceAccountAssertion, submitSitemap } = await import('../cron/gsc.js');
+  const pair = await crypto.subtle.generateKey({ name: 'RSASSA-PKCS1-v1_5', modulusLength: 2048, publicExponent: new Uint8Array([1, 0, 1]), hash: 'SHA-256' }, true, ['sign', 'verify']);
+  const der = Buffer.from(await crypto.subtle.exportKey('pkcs8', pair.privateKey)).toString('base64');
+  const pem = `-----BEGIN PRIVATE KEY-----\\n${der.match(/.{1,64}/g).join('\\n')}\\n-----END PRIVATE KEY-----\\n`; // as pasted into an env var
+  const jwt = await serviceAccountAssertion('sa@p.iam.gserviceaccount.com', pem, 'scope-x', 1000);
+  const [h, p, s] = jwt.split('.');
+  const dec = (x) => Buffer.from(x.replace(/-/g, '+').replace(/_/g, '/'), 'base64');
+  assert.deepEqual(JSON.parse(dec(p)), { iss: 'sa@p.iam.gserviceaccount.com', scope: 'scope-x', aud: 'https://oauth2.googleapis.com/token', iat: 1000, exp: 4600 });
+  assert.equal(await crypto.subtle.verify('RSASSA-PKCS1-v1_5', pair.publicKey, dec(s), new TextEncoder().encode(`${h}.${p}`)), true);
+
+  const calls = [];
+  const fake = async (url, opts) => { calls.push([url, opts.method]); return url.includes('oauth2') ? new Response(JSON.stringify({ access_token: 't' })) : new Response(null, { status: 204 }); };
+  const msg = await submitSitemap({ GSC_CLIENT_EMAIL: 'sa@p.iam.gserviceaccount.com', GSC_PRIVATE_KEY: pem, SITE_URL: 'https://anaagathr.com' }, fake);
+  assert.equal(msg, 'sitemap submit 204');
+  assert.deepEqual(calls[1], ['https://www.googleapis.com/webmasters/v3/sites/sc-domain%3Aanaagathr.com/sitemaps/https%3A%2F%2Fanaagathr.com%2Fsitemap.xml', 'PUT']);
+  assert.match(await submitSitemap({}), /^skipped/);
+});
+
 test('edit keys go on text and images, never nested, and are stable on re-run', () => {
   assert.equal(simpleInner('Hello <b>you</b>'), true);
   assert.equal(simpleInner('<span class="tile"><svg></svg></span>Manufacturing'), false);

@@ -47,17 +47,28 @@
 
   // prefill the quote form's service from any link that names one
   $$('[data-svc]').forEach(function (a) {
-    a.addEventListener('click', function () { var s = $('#q-svc'); if (!s) { try { sessionStorage.setItem('svc', a.dataset.svc); } catch (e) {} return; } [].slice.call(s.options).forEach(function (o) { if (o.text === a.dataset.svc) s.value = o.text; }); });
+    a.addEventListener('click', function () { var s = $('#q-svc'); if (!s) { try { sessionStorage.setItem('svc', a.dataset.svc); } catch (e) {} return; } [].slice.call(s.options).forEach(function (o) { if (o.value === a.dataset.svc) s.value = o.value; }); });
   });
-  try { var pending = sessionStorage.getItem('svc'), sel = $('#q-svc'); if (pending && sel) { [].slice.call(sel.options).forEach(function (o) { if (o.text === pending) sel.value = o.text; }); sessionStorage.removeItem('svc'); } } catch (e) {}
+  try { var pending = sessionStorage.getItem('svc'), sel = $('#q-svc'); if (pending && sel) { [].slice.call(sel.options).forEach(function (o) { if (o.value === pending) sel.value = o.value; }); sessionStorage.removeItem('svc'); } } catch (e) {}
 
   // Forms post nowhere until data-endpoint is set; until then they say so instead of faking a success.
-  var NOT_CONNECTED = 'Nothing was sent: this form is not connected yet. Please call or WhatsApp +91 90019 65072.';
-  var FAILED = 'That did not go through. Please try again, or call +91 90019 65072.';
+  var T = document.documentElement.lang === 'hi' ? {
+    notConnected: 'कुछ भी नहीं भेजा गया: यह फ़ॉर्म अभी जुड़ा नहीं है। कृपया +91 90019 65072 पर कॉल या WhatsApp करें।',
+    failed: 'यह नहीं हो पाया। कृपया दोबारा कोशिश करें, या +91 90019 65072 पर कॉल करें।',
+    editing: 'पेज एडिट करते समय फ़ॉर्म बंद रहते हैं।', fill: 'कृपया भरें: ',
+    thanks: function (n) { return 'धन्यवाद, ' + n + '। हमारी टीम एक कार्य-दिवस के भीतर परामर्श और कोटेशन के लिए आपको कॉल करेगी।'; },
+    badEmail: 'कृपया सही ईमेल पता लिखें।', subscribed: function (v) { return 'सब्सक्राइब करने के लिए धन्यवाद। अपडेट ' + v + ' पर आएँगे।'; }
+  } : {
+    notConnected: 'Nothing was sent: this form is not connected yet. Please call or WhatsApp +91 90019 65072.',
+    failed: 'That did not go through. Please try again, or call +91 90019 65072.',
+    editing: 'Forms are switched off while you edit the page.', fill: 'Please fill in: ',
+    thanks: function (n) { return 'Thank you, ' + n + '. Our team will call you within one working day with a consultation and quote.'; },
+    badEmail: 'Please enter a valid email address.', subscribed: function (v) { return 'Thanks for subscribing. Updates will reach ' + v + '.'; }
+  };
   function send(f, onOk, onFail) {
-    if (editing) { onFail('Forms are switched off while you edit the page.'); return; }
-    if (!f.dataset.endpoint) { onFail(NOT_CONNECTED); return; }
-    fetch(f.dataset.endpoint, { method: 'POST', body: new FormData(f) }).then(function (r) { r.ok ? onOk() : onFail(FAILED); }).catch(function () { onFail(FAILED); });
+    if (editing) { onFail(T.editing); return; }
+    if (!f.dataset.endpoint) { onFail(T.notConnected); return; }
+    fetch(f.dataset.endpoint, { method: 'POST', body: new FormData(f) }).then(function (r) { r.ok ? onOk() : onFail(T.failed); }).catch(function () { onFail(T.failed); });
   }
   var qf = $('#quoteForm');
   if (qf) {
@@ -66,17 +77,33 @@
       e.preventDefault(); err.textContent = ''; ok.classList.remove('show');
       var missing = $$('[required]', qf).filter(function (x) { x.removeAttribute('aria-invalid'); return !x.value.trim(); });
       missing.forEach(function (x) { x.setAttribute('aria-invalid', 'true'); });
-      if (missing.length) { err.textContent = 'Please fill in: ' + missing.map(function (x) { return $('label[for="' + x.id + '"]', qf).textContent; }).join(', ') + '.'; missing[0].focus(); return; }
+      if (missing.length) { err.textContent = T.fill + missing.map(function (x) { return $('label[for="' + x.id + '"]', qf).textContent; }).join(', ') + '.'; missing[0].focus(); return; }
       var name = ($('[name="name"]', qf).value || '').trim().split(' ')[0];
-      send(qf, function () { ok.textContent = 'Thank you, ' + name + '. Our team will call you within one working day with a consultation and quote.'; ok.classList.add('show'); qf.reset(); }, function (m) { err.textContent = m; });
+      send(qf, function () { ok.textContent = T.thanks(name); ok.classList.add('show'); qf.reset(); }, function (m) { err.textContent = m; });
     });
   }
   var nf = $('#newsForm');
   if (nf) {
     nf.addEventListener('submit', function (e) {
       e.preventDefault(); var v = $('#n-email').value.trim(), m = $('#newsMsg');
-      if (!/.+@.+\..+/.test(v)) { m.textContent = 'Please enter a valid email address.'; return; }
-      send(nf, function () { m.textContent = 'Thanks for subscribing. Updates will reach ' + v + '.'; }, function (t) { m.textContent = t; });
+      if (!/.+@.+\..+/.test(v)) { m.textContent = T.badEmail; return; }
+      send(nf, function () { m.textContent = T.subscribed(v); }, function (t) { m.textContent = t; });
     });
   }
+
+  // dark mode: the head script already applied the stored or system theme; this flips and remembers it
+  var root = document.documentElement;
+  $$('[data-theme-toggle]').forEach(function (b) {
+    var sync = function () { b.setAttribute('aria-pressed', root.dataset.theme === 'dark'); };
+    sync();
+    b.addEventListener('click', function () {
+      root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+      try { localStorage.setItem('theme', root.dataset.theme); } catch (e) {}
+      sync();
+    });
+  });
+
+  // the "available in Hindi" bar: closing it keeps it closed for a year
+  var hint = $('[data-lang-hint]'), close = $('[data-lang-hint-close]');
+  if (hint && close) close.addEventListener('click', function () { hint.hidden = true; document.cookie = 'lang_hint=0; path=/; max-age=31536000; samesite=lax'; });
 })();

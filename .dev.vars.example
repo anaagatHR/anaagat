@@ -31,3 +31,10 @@ AI_MODEL=
 
 # Optional: your own RSS feeds instead of the built-in Google News topics (comma-separated URLs).
 # BLOG_FEEDS=
+
+# Optional, for later subdomains (auth.anaagathr.com, crm.anaagathr.com): share one sign-in across them.
+# COOKIE_DOMAIN=.anaagathr.com
+
+# Weekly Search Console sitemap resubmission: set these on the cron Worker (cd cron && npx wrangler secret put ...).
+# GSC_CLIENT_EMAIL=service-account@project.iam.gserviceaccount.com
+# GSC_PRIVATE_KEY=<the "private_key" value from the service account JSON file>

@@ -75,6 +75,27 @@ Sign in at `/admin/login`, then use the dashboard links, or press *Edit this pag
 
 Adding new markup? Run `npm run keys` so new text gets an edit key. Existing keys never change.
 
+## Languages, dark mode, icons
+
+- **Hindi**: `public/hi/` holds the Hindi home and blog pages, and `public/partials/*-hi.html` the Hindi header and footer. Every page shows a gold *हिंदी में पढ़ें* button. Visitors whose browser asks for Hindi also see a one-line bar offering the Hindi site. Hindi text is edited with the same no-code editor (open `/hi/?edit=1`). If you change the English page's structure, mirror it in the Hindi page.
+- **Dark mode**: the moon/sun button in the header. The first visit follows the device setting, and the choice is remembered in the visitor's browser.
+- **Icons**: `public/favicon.ico` (16 to 64 px), plus `assets/icon-192.png`, `assets/icon-512.png` and `assets/apple-touch-icon.png`.
+
+## Sitemap and Google Search Console
+
+`/sitemap.xml` is generated on request. It lists the English/Hindi pairs and every published blog post, so a new post appears in it within 10 minutes. Every Monday at 8:30 am IST the cron Worker resubmits it to Search Console. To switch that on:
+
+1. Search Console > add a **Domain** property `anaagathr.com` and verify it with the DNS TXT record (Cloudflare DNS).
+2. Google Cloud Console > IAM > Service accounts > create one, then *Keys* > *Add key* > JSON. Enable the "Google Search Console API" for the project.
+3. Search Console > Settings > Users and permissions > add the service account's email as **Owner**.
+4. `cd cron && npx wrangler secret put GSC_CLIENT_EMAIL` (the `client_email` from the JSON) and `npx wrangler secret put GSC_PRIVATE_KEY` (the `private_key`), then `npx wrangler deploy`.
+
+Google still decides how often it crawls. The weekly submission keeps the sitemap fresh in Search Console and surfaces errors there.
+
+## Future plans
+
+Subdomains (`auth.`, `crm.`, `admin.`, `media.`, `api.`) and the client CRM are planned in [docs/ROADMAP.md](docs/ROADMAP.md).
+
 ## Still to provide
 
 - The four company figures on the home page (shown as "add figure" slots until edited in).

@@ -9,6 +9,7 @@ const FILES = {
   'public/partials/header.html': 'g.h', 'public/partials/footer.html': 'g.f', 'public/index.html': 'home',
   'public/privacy.html': 'privacy', 'public/terms.html': 'terms', 'public/404.html': 'nf',
   'public/blog/index.html': 'blog', 'public/blog/_post.html': 'post',
+  'public/partials/header-hi.html': 'g.hih', 'public/partials/footer-hi.html': 'g.hif', 'public/hi/index.html': 'hi', 'public/hi/blog/index.html': 'hiblog',
 };
 const TEXT = new Set(['h1', 'h2', 'h3', 'h4', 'p', 'li', 'figcaption', 'dt', 'dd', 'a', 'b', 'span', 'blockquote', 'time']);
 const VOID = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr']);

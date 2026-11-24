@@ -6,10 +6,17 @@ import { pagePath, loadRecords, applyOverrides } from '../lib/content.js';
 const ADMIN_PAGE = /^\/admin(\/|\/index(\.html)?)?$/;
 const PARTIALS = ['header', 'footer'];
 
-async function renderPartial(env, url, name, global) {
+// Pages that exist in both languages; everything else switches to the other language's home page.
+const TO_HI = { '/': '/hi/', '/blog': '/hi/blog' };
+const TO_EN = { '/hi': '/', '/hi/blog': '/blog' };
+
+async function renderPartial(env, url, name, global, opts) {
   const r = await env.ASSETS.fetch(new URL(`/partials/${name}`, url));
   if (!r.ok) return '';
-  return applyOverrides(new HTMLRewriter(), global).transform(r).text();
+  const rw = applyOverrides(new HTMLRewriter(), global)
+    .on('[data-lang-switch]', { element(el) { el.setAttribute('href', opts.switchTo); } });
+  if (opts.hint) rw.on('[data-lang-hint]', { element(el) { el.removeAttribute('hidden'); } });
+  return rw.transform(r).text();
 }
 
 const safeJson = (v) => JSON.stringify(v).replace(/</g, '\\u003c');
@@ -31,8 +38,13 @@ export async function onRequest(ctx) {
   const edit = !!user && url.searchParams.get('edit') === '1';
   const record = res.status === 404 ? '/404' : path.startsWith('/blog/') ? '/blog/_post' : pagePath(path);
   const { page, global } = await loadRecords(env, record, edit);
+  const hindi = path === '/hi' || path.startsWith('/hi/');
+  const here = pagePath(path);
+  const switchTo = hindi ? (TO_EN[here] || '/') : (TO_HI[here] || '/hi/');
+  // Offer Hindi to browsers that ask for it, until the visitor closes the bar.
+  const hint = !hindi && /\bhi\b/i.test(request.headers.get('accept-language') || '') && !/(?:^|;\s*)lang_hint=0/.test(request.headers.get('cookie') || '');
   const parts = {};
-  for (const name of PARTIALS) parts[name] = await renderPartial(env, url, name, global);
+  for (const name of PARTIALS) parts[name] = await renderPartial(env, url, hindi ? `${name}-hi` : name, global, { switchTo, hint });
 
   const rw = new HTMLRewriter().on('[data-include]', {
     element(el) { const n = el.getAttribute('data-include'); if (n in parts) el.replace(parts[n], { html: true }); },

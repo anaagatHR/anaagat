@@ -35,7 +35,7 @@ export async function onRequestGet({ request, env }) {
   const week = 7 * 24 * 3600;
   const token = await sign({ email: p.email, name: p.name || p.email, picture: p.picture || '', exp: Date.now() + week * 1000 }, env.SESSION_SECRET);
   const headers = new Headers({ location: '/admin' });
-  headers.append('set-cookie', sessionCookie(token, week));
+  headers.append('set-cookie', sessionCookie(token, week, env.COOKIE_DOMAIN));
   headers.append('set-cookie', 'oauth_state=; Path=/auth; HttpOnly; Secure; SameSite=Lax; Max-Age=0');
   return new Response(null, { status: 302, headers });
 }

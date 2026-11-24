@@ -13,6 +13,7 @@ Key facts:
 ## Main pages
 
 - [Home](https://anaagathr.com/): services, industries, training centres, how we work, founder, and the quote form
+- [हिंदी होम (Hindi home page)](https://anaagathr.com/hi/): the same services, industries and contact details in Hindi
 - [Blog](https://anaagathr.com/blog): daily notes on hiring, labour law and the industries Anaagat staffs, written with AI assistance from cited news sources and reviewed by the team
 
 ## Policies

@@ -1,11 +1,14 @@
-# Daily blog-draft trigger. Deploy: cd cron && npx wrangler deploy && npx wrangler secret put CRON_SECRET
+# Daily blog-draft and weekly sitemap trigger.
+# Deploy: cd cron && npx wrangler deploy && npx wrangler secret put CRON_SECRET
+# Optional (Search Console): npx wrangler secret put GSC_CLIENT_EMAIL && npx wrangler secret put GSC_PRIVATE_KEY
 name = "anaagat-blog-cron"
 main = "worker.js"
 compatibility_date = "2026-10-01"
 
 [vars]
 SITE_URL = "https://anaagathr.com"
+GSC_SITE = "sc-domain:anaagathr.com"
 
 [triggers]
-# 02:30 UTC = 8:00 am in India, every day
-crons = ["30 2 * * *"]
+# 02:30 UTC daily = 8:00 am IST blog draft; 03:00 UTC Mondays = 8:30 am IST sitemap resubmission
+crons = ["30 2 * * *", "0 3 * * 1"]
