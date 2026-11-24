@@ -11,15 +11,16 @@ SITE_URL = "https://anaagathr.com"
 # Page edits from the inline editor. Create with: npx wrangler kv namespace create CONTENT
 [[kv_namespaces]]
 binding = "CONTENT"
-id = "REPLACE_WITH_KV_NAMESPACE_ID"
+id = "9691eaee367e45339dee830f004c4117"
 
 # Blog posts. Create with: npx wrangler d1 create anaagat
 [[d1_databases]]
 binding = "DB"
 database_name = "anaagat"
-database_id = "REPLACE_WITH_D1_DATABASE_ID"
+database_id = "420a37d4-2b65-4201-a88d-83503d2f6867"
 
 # Images uploaded in the editor. Create with: npx wrangler r2 bucket create anaagat-media
-[[r2_buckets]]
-binding = "MEDIA"
-bucket_name = "anaagat-media"
+# Disabled until R2 is enabled on the Cloudflare account (R2 > Get started). Then remove the # from the 3 lines below.
+# [[r2_buckets]]
+# binding = "MEDIA"
+# bucket_name = "anaagat-media"
